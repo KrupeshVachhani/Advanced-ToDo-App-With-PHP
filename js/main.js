@@ -1,4 +1,19 @@
 $(document).ready(function () {
+  // Load tasks order from local storage
+  function loadTasksOrder() {
+    var order = localStorage.getItem("tasksOrder");
+    if (order) {
+      var orderArray = order.split(",");
+      var taskList = $("#task-list");
+      orderArray.forEach(function (id) {
+        var taskItem = $('li[data-id="' + id + '"]');
+        taskList.append(taskItem);
+      });
+    }
+  }
+
+  loadTasksOrder();
+
   $("#task-form").on("submit", function (event) {
     event.preventDefault();
     var taskInput = $("#task-input").val();
